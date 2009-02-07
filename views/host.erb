@@ -1,0 +1,30 @@
+<h1>Usage stats for <%= @host.address %></h1>
+<a href="/">&larr; Go back</a>
+<dl>
+  <dt>Total connections since restart</dt>
+  <dd><%= @host.total_connections %></dd>
+  <dt>Current connections</dt>
+  <dd><%= @host.curr_connections %></dd>
+  <dt>Total memory</dt>
+  <dd><%= number_to_human_size(@host.limit_maxbytes) %></dd>
+  <dt>Total items</dt>
+  <dd><%= @host.total_items %></dd>
+  <dt>Current items</dt>
+  <dd><%= @host.curr_items %></dd>
+  
+</dl>
+
+<div class="stat">
+  <h3>Cache hits vs misses</h3>
+  <img src="<%= graph_url("Hits" => @host.get_hits, "Misses" => @host.get_misses) %>">
+</div>
+
+<div class="stat">
+  <h3>Read vs Write</h3>
+  <img src="<%= graph_url("Reads" => @host.cmd_get, "Writes" => @host.cmd_set) %>">
+</div>
+
+<div class="stat">
+  <h3>Free memory vs Available</h3>
+  <img src="<%= graph_url("Used" => @host.bytes, "Free" => @host.limit_maxbytes) %>">
+</div>

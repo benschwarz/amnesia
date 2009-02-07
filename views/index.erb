@@ -1,0 +1,47 @@
+<h1>Hosts</h1>
+
+<% unless @hosts.empty? %>
+<ul id="hosts">
+  <% for host in @hosts %>
+    <li>
+      <% if host.alive? %>
+        <p><a href="/hosts/<%= host.id %>"><%= host.address %></a> (Running)</p>
+      <% else %>
+        <p><%= host.address %> (Unreachable)</p>
+      <% end %>
+      <form action="/hosts/<%= host.id %>/destroy" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button>Remove</button>
+      </form>
+    </li>
+  <% end %>
+</ul>
+<% else %>
+  <p>No hosts</p>
+<% end %>
+
+<h2>Add a new host</h2>
+<form action="/hosts/create" method="post">
+  <label for="host">Address of your memcached host</label>
+  <input type="text" name="host[address]" id="host">  
+  
+  <button>Add host</button>
+</form>
+
+<% unless @hosts.empty? %>
+<h2>Statistics for active hosts</h2>
+<div class="stat">
+  <h3>Cache hits vs misses</h3>
+  <img src="<%= graph_url("Hits" => @hosts.collect{|h| h.get_hits if h.alive? }.compact.sum, "Misses" => @hosts.collect{|h| h.get_misses if h.alive? }.compact.sum) %>">
+</div>
+
+<div class="stat">
+  <h3>Read vs Write</h3>
+  <img src="<%= graph_url("Reads" => @hosts.collect{|h| h.cmd_get if h.alive? }.compact.sum, "Writes" => @hosts.collect{|h| h.cmd_set if h.alive? }.compact.sum) %>">
+</div>
+
+<div class="stat">
+  <h3>Free memory vs Available</h3>
+  <img src="<%= graph_url("Used" => @hosts.collect{|h| h.bytes if h.alive? }.compact.sum, "Free" => @hosts.collect{|h| h.limit_maxbytes if h.alive? }.compact.sum) %>">
+</div>
+<% end %>
