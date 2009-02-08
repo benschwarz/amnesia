@@ -20,11 +20,18 @@ end
 
 delete '/hosts/:host/destroy' do
   @host = Host.get(params[:host])
+  throw not_found unless @host
   @host.destroy
   redirect url('/')
 end
 
 get '/hosts/:host' do
   @host = Host.get(params[:host])
+  throw not_found unless @host
   erb :host
 end
+
+not_found do
+  erb :not_found
+end
+  
