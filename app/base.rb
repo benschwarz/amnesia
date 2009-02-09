@@ -6,22 +6,14 @@ module Amnesia
       Sinatra::Application
     end
     
-    def log(message)
-      logger.info(message)
-    end
-    
     def config
       @config ||= default_config
     end
     
     private
-    def logger
-      @logger ||= Logger.new(config[:log])
-    end
     
     def default_config
       @default ||= {
-        :log => STDOUT,
         :db => 'sqlite3::memory:'
       }
     end
