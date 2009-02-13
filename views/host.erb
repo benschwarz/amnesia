@@ -1,30 +1,68 @@
-<h1>Usage stats for <%= @host.address %></h1>
-<a href="/">&larr; Go back</a>
-<dl>
-  <dt>Total connections since restart</dt>
-  <dd><%= @host.total_connections %></dd>
-  <dt>Current connections</dt>
-  <dd><%= @host.curr_connections %></dd>
-  <dt>Total memory</dt>
-  <dd><%= number_to_human_size(@host.limit_maxbytes) %></dd>
-  <dt>Total items</dt>
-  <dd><%= @host.total_items %></dd>
-  <dt>Current items</dt>
-  <dd><%= @host.curr_items %></dd>
+<a href="/" id="back">&larr; Back to overview</a>
+
+<h2><%= @host.address %></h2>
+<p class="sub"><em>Usage stats</em></p>
+
+<div id="details">
+  <h2>Details</h2>
+  <p class="sub"><em>Miscellaneous statistics</em></p>
   
-</dl>
-
-<div class="stat">
-  <h3>Cache hits vs misses</h3>
-  <img src="<%= graph_url("Hits" => @host.get_hits, "Misses" => @host.get_misses) %>">
+  <dl class="stat">
+    <h4>Memory</h4>
+    <dt>Used</dt>
+    <dd><%= number_to_human_size(@host.bytes) %></dd>
+    <dt>Total</dt>
+    <dd><%= number_to_human_size(@host.limit_maxbytes) %></dd>
+  </dl>
+  
+  <dl class="stat">
+    <h4>Accuracy</h4>
+    <dt>Hits</dt>
+    <dd><%= @host.get_hits %></dd>
+    <dt>Misses</dt>
+    <dd><%= @host.get_misses %></dd>
+  </dl>
+  
+  <dl class="stat">
+    <h4>Access</h4>
+    <dt>Read</dt>
+    <dd><%= @host.cmd_get %></dd>
+    <dt>Write</dt>
+    <dd><%= @host.cmd_set %></dd>
+  </dl>
+  
+  <dl class="stat">
+    <h4>Connections</h4>
+    <dt>Current</dt>
+    <dd><%= @host.curr_connections %></dd>
+    <dt>Total</dt>
+    <dd><%= @host.total_items %></dd>
+  </dl>
+  
+  <dl class="stat">
+    <h4>Items</h4>
+    <dt>Current</dt>
+    <dd><%= @host.curr_items %></dd>
+    <dt>Total</dt>
+    <dd><%= @host.total_items %></dd>
+  </dl>
 </div>
 
-<div class="stat">
-  <h3>Read vs Write</h3>
-  <img src="<%= graph_url("Reads" => @host.cmd_get, "Writes" => @host.cmd_set) %>">
+<div class="stats graph">
+  <img src="<%= graph_url([@host.bytes, @host.limit_maxbytes], ["Used", "Free"]) %>">
+  <h3><span class="graph-indicator">Free memory</span> / Used Memory</h3>
+  <p>The cumulative amount of free memory and total memory across all active hosts.</p>
 </div>
 
-<div class="stat">
-  <h3>Free memory vs Available</h3>
-  <img src="<%= graph_url("Used" => @host.bytes, "Free" => @host.limit_maxbytes) %>">
+<div class="stats graph">
+  <img src="<%= graph_url([@host.get_hits, @host.get_misses], ["Hits", "Misses"]) %>">
+  <h3><span class="graph-indicator">Hit</span> / Miss</h3>
+  <p>The amount of returned caches vs misses, misses usually require your application servers to work harder.</p>
 </div>
+
+<div class="stats graph">
+  <img src="<%= graph_url([@host.cmd_get, @host.cmd_set], ["Reads", "Writes"]) %>">
+  <h3><span class="graph-indicator">Read</span> / Write</h3>
+  <p>More writes than reads can often mean that you’re caching too early, or that you’ve not been monitoring for very long.</p>
+</div>
+

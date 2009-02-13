@@ -4,9 +4,18 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Amnesia</title>
+    <link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/css/application.css" type="text/css" media="screen" charset="utf-8">
   </head>
   <body>
-    <%= yield %>
+    <div id="header">
+      <div class="container">
+        <h1><a href="/">Amnesia</a></h1>
+        <p><em>Statistics for Memcached</em></p>
+      </div>
+    </div>
+    <div id="main" class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

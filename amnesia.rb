@@ -3,7 +3,7 @@ require 'yaml'
 require 'dm-core'
 require 'memcache'
 require 'active_support'
-require 'google_chart'
+require 'gchart'
 
 Dir["app/core_ext/*.rb"].each &method(:require)
 

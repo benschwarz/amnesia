@@ -12,7 +12,3 @@ $:.unshift "#{root_dir}"
 require 'amnesia'
 
 run Amnesia.new('amnesia.yml')
-
-Sinatra::Default.configure :development do
-  DataMapper.auto_migrate!
-end
