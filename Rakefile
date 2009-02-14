@@ -1,13 +1,21 @@
-require File.dirname(__FILE__) + "amnesia"
+require File.join(File.dirname(__FILE__), "amnesia")
+require 'spec/rake/spectask'
 
 namespace :db do
-  task :connect
+  task :connect do
     Amnesia.new
   end
   
   desc "Auto migrate the database"
-  task :migrate do
+  task :migrate => :connect do
     DataMapper.auto_migrate!
-  end  
-  
+  end
+end
+
+task :default => :spec
+
+desc "Run RSpec test suite"
+Spec::Rake::SpecTask.new(:spec) do |t|
+  t.spec_opts = ['-c', '--format specdoc']
+  t.spec_files = FileList['spec/**/*_spec.rb']
 end

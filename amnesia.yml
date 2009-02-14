@@ -1,1 +1,18 @@
-:db: 'sqlite3:///amnesia.db'
+# Mysql
+# mysql://user@localhost/amnesia
+
+# Sqlite3
+# :db: 'sqlite3://amnesia.db'
+
+# Default 
+:development:
+  :db: 'mysql://root@localhost/amnesia'
+  :auth:
+    :username: 'admin'
+    :password: 'amnesia'
+
+:test: 
+  :db: 'sqlite3::memory:'
+  :auth:
+    :username: 'admin'
+    :password: 'amnesia'

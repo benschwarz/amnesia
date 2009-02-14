@@ -1,7 +1,9 @@
-include Amnesia
-
 helpers do
-  include Helpers
+  include Amnesia::Helpers
+end
+
+before do
+  protected! if Amnesia.config.has_key?(:auth)
 end
 
 get '/' do

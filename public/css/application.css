@@ -4,7 +4,7 @@ div.container { width: 605px; margin: 0 auto; }
 h1, h2, h3 { color: #1f1f1f; }
 img { display: block; }
 a { color: #1f1f1f; }
-button { padding: 0; }
+button { padding: 0; background-color: white; border: 0; text-decoration: underline; }
 a:hover, button:hover { color: #666; cursor: pointer; }
 
 div#header { background-color: #e1e1e1; padding: 20px 0 10px 0; line-height: 1.3em; }
@@ -34,7 +34,7 @@ div#hosts li p { font-weight: bold; color: #1f1f1f; }
 div#hosts li.inactive p { color: #ccc; }
 div#hosts li.inactive p.status { font-size: 0.8em; }
 
-div#hosts li button { background-color: white; border: 0; text-decoration: underline; position: absolute; right: 0; top: 0; }
+div#hosts li button { position: absolute; right: 0; top: 0; }
 
 div#main div#details { position: absolute; top: 0; left: 560px; width: 220px; }
 
