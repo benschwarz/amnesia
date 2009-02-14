@@ -1,7 +1,7 @@
 module Amnesia  
   class << self
-    def new(config_file)
-      self.config = config_file unless config_file.nil?
+    def new
+      configure!
       DataMapper.setup(:default, config[:db])
       Sinatra::Application
     end
@@ -18,8 +18,8 @@ module Amnesia
       }
     end
     
-    def config=(file)
-      @config ||= default_config.merge(YAML.load_file(file))
+    def configure!
+      @config ||= default_config.merge(YAML.load_file('amnesia.yml'))
     end
   end
 end

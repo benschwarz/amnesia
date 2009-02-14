@@ -1,4 +1,4 @@
-<% unless @hosts.empty? %>
+<% if !@hosts.empty? and @hosts.any?{|h| h.alive? } %>
 <div id="overall">
   <h2>Overview</h2>
   <p class="sub"><em>For all active hosts</em></p>

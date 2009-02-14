@@ -1,0 +1,6 @@
+[submodule "vendor/sinatra-ditties"]
+	path = vendor/sinatra-ditties
+	url = git://github.com/foca/sinatra-ditties.git
+[submodule "vendor/gchart"]
+	path = vendor/gchart
+	url = git://github.com/abhay/gchart.git
