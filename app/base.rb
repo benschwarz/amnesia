@@ -6,7 +6,7 @@ module Amnesia
     end
     
     def config
-      @config ||= YAML.load_file('amnesia.yml')
+      @config ||= YAML.load_file('amnesia.yml')[Sinatra::Application.environment]
     end
   end
 end

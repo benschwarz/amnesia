@@ -6,9 +6,12 @@ require 'dm-sweatshop'
 root = File.join(File.dirname(__FILE__), '..')
 
 require "#{root}/amnesia.rb"
-require "#{root}/spec/helpers"
+require "#{root}/spec/support/helpers"
+require "#{root}/spec/support/factory"
 
 Amnesia.new
+
+DataMapper.auto_migrate!
 
 include Amnesia::Spec::Helper
 

@@ -1,15 +1,6 @@
 module Amnesia
   module Helpers 
     module Url
-      def path_for(klass_instance, *args)
-        "/" << [klass_instance.id, *args].join("/")
-      end
-  
-      def url_for(klass_instance, *args)
-        url(path_for(klass_instance, args))
-      end
-  
-      # Thanks, integrity
       def url(path)
         url = "#{request.scheme}://#{request.host}"
 

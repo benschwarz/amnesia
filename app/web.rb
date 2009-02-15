@@ -1,7 +1,5 @@
-include Amnesia
-
 helpers do
-  include Helpers
+  include Amnesia::Helpers
 end
 
 before do

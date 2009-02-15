@@ -5,7 +5,14 @@
 # :db: 'sqlite3://amnesia.db'
 
 # Default 
-:db: 'mysql://root@localhost/amnesia'
-:auth:
-  :username: 'admin'
-  :password: 'amnesia'
+:development:
+  :db: 'mysql://root@localhost/amnesia'
+  :auth:
+    :username: 'admin'
+    :password: 'amnesia'
+
+:test: 
+  :db: 'sqlite3::memory:'
+  :auth:
+    :username: 'admin'
+    :password: 'amnesia'

@@ -12,7 +12,7 @@ describe "HTTP Auth" do
   end
 end
 
-describe "response / routes" do
+describe "response to paths" do
   
   describe 'successful' do
     it "should respond to root" do
@@ -20,8 +20,15 @@ describe "response / routes" do
       @response.status.should == 200
     end
     
+    it "should respond to /hosts/new" do
+      auth(:get, "/hosts/new")
+      @response.status.should == 200
+    end
+    
     it "should respond to /hosts/num" do
-      auth(:get, "/hosts/#{Host.first.id}")
+      host = Host.gen
+      
+      auth(:get, "/hosts/#{host.id}")
       @response.status.should == 200
     end
   end
