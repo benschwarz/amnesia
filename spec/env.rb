@@ -11,7 +11,7 @@ require "#{root}/amnesia.rb"
 require "#{root}/spec/support/helpers"
 require "#{root}/spec/support/factory"
 
-Amnesia.new
+Amnesia.new(File.join(File.dirname(__FILE__), 'support', 'amnesia_config.yml'))
 
 DataMapper.auto_migrate!
 
