@@ -1,7 +1,7 @@
 require 'amnesia'
 
 set :run, false
-set :environment, ENV['RACK_ENV']
+set :environment, :production
 set :raise_errors, true
 
 run Amnesia.new
