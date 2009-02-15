@@ -1,1 +1,11 @@
-:db: 'sqlite3:///amnesia.db'
+# Mysql
+# mysql://user@localhost/amnesia
+
+# Sqlite3
+# :db: 'sqlite3://amnesia.db'
+
+# Default 
+:db: 'mysql://root@localhost/amnesia'
+:auth:
+  :username: 'admin'
+  :password: 'amnesia'

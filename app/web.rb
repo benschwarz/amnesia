@@ -4,6 +4,10 @@ helpers do
   include Helpers
 end
 
+before do
+  protected! if Amnesia.config.has_key?(:auth)
+end
+
 get '/' do
   @hosts = Host.all
   erb :index

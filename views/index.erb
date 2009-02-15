@@ -32,9 +32,9 @@
     <% for host in @hosts %>
       <li<%= " class=\"inactive\"" unless host.alive? %>>
         <% if host.alive? %>
-          <p><a href="/hosts/<%= host.id %>"><%= host.address %></a></p>
+          <p><a href="/hosts/<%= host.id %>"><%=h host.address %></a></p>
         <% else %>
-          <p><%= host.address %></p>
+          <p><%=h host.address %></p>
           <p class="status">Inactive / Not Responding</p>
         <% end %>
         <form action="/hosts/<%= host.id %>/destroy" method="post">

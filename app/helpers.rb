@@ -2,6 +2,7 @@ Dir["#{File.dirname(__FILE__)}/helpers/*.rb"].each &method(:require)
 
 module Amnesia
   module Helpers
+    include Auth
     include Url
     include Number
     include HostGraph
