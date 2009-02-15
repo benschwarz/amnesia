@@ -2,8 +2,6 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/test/rspec'
 require 'dm-sweatshop'
-require 'elementor'
-require 'elementor/spec'
 
 root = File.join(File.dirname(__FILE__), '..')
 
@@ -16,7 +14,6 @@ Amnesia.new(File.join(File.dirname(__FILE__), 'support', 'amnesia_config.yml'))
 DataMapper.auto_migrate!
 
 include Amnesia::Spec::Helper
-include Elementor
 
 set :public, "#{root}/public"
 set :views,  "#{root}/views"
