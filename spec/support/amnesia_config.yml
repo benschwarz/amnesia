@@ -1,0 +1,5 @@
+:test: 
+  :db: 'sqlite3::memory:'
+  :auth:
+    :username: 'admin'
+    :password: 'amnesia'

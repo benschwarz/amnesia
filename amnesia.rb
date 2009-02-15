@@ -8,7 +8,7 @@ require 'sinatra'
 require 'dm-core'
 require 'memcache' # memcache-client
 require 'active_support'
-require 'gchart' # googlecharts
+require 'gchart' # gchart, on github
 
 # Core extensions
 Dir["app/core_ext/*.rb"].each &method(:require)

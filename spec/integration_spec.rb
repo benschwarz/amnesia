@@ -7,8 +7,8 @@ describe "Existing hosts" do
   
   describe "/ (index)" do
     it "should list the host" do
+      pending
       auth(:get, '/')
-      puts @response.body
     end
   end
 end
