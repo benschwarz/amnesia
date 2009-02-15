@@ -20,5 +20,5 @@
 :production:
   :db: 'mysql:///var/www/amnesia/shared/amnesia.db'
   :auth:
-    :username: 'amnesia'
-    :password: 'ggghhj'
+    :username: 'admin'
+    :password: 'amnesia'
