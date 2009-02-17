@@ -41,15 +41,24 @@ I recommend that you stick to using sqlite3 in production, the persistance side 
 
 Use capistrano, vlad or dump it straight onto your server, you'll need to rename amnesia.yml.example to amnesia.yml and make some changes. 
 
-Be sure to set your `RackEnv` environment variable and run `rake db:migrate`, this will create your database (when using sqlite3, Mysql users will need to create the db themselves prior)
-
-If you plan to run Amnesia on a VPS, I recommend that you use Passenger, this is just so that you can claim back your memory when Amnesia isn't in use. Having said that, it'll work with any Rack based Ruby web server.
-
-The config.ru file provided should be fine to use in production.
-
 ### Authentication
 
 If you don't want authentication, remove the auth block from amnesia.yml
+
+Be sure to set your `RackEnv` environment variable and run `rake db:migrate`, this will create your database (when using sqlite3, Mysql users will need to create the db themselves prior)
+
+### Servers
+
+If you plan to run Amnesia on a VPS, I recommend that you use Passenger, this is just so that you can claim back your memory when Amnesia isn't in use. Having said that, it'll work with any Rack based Ruby web server. 
+
+You can install Apache, Passenger and Ruby Enterprise (with other friends if you like) quickly using [passenger-stack](http://benschwarz.github.com/passenger-stack)
+
+The config.ru file provided should be fine to use in production.
+
+When passenger isn't an option, or you want to keep things simple, you can always run your app with the `rackup` command:
+
+      # Start on port 80 using mongrel
+      rackup config.ru -p 80 -s mongrel
 
 ## Potential issues
 
