@@ -35,7 +35,7 @@ Available for single instances only:
 
 Install a plethora of dependencies, I really wanted to make amnesia a gem, but being that its an application, it would mean more meaningless coding for me than I really want to do.
 
-    sudo gem install sinatra dm-core do_sqlite3 memcache-client active_support gchart
+    sudo gem install sinatra dm-core do_sqlite3 memcache-client activesupport gchart rspec
 
 I recommend that you stick to using sqlite3 in production, the persistance side of Amnesia is _very_ light.
 
