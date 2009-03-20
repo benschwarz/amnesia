@@ -1,4 +1,52 @@
 <% if !@hosts.empty? and @hosts.any?{|h| h.alive? } %>
+
+  <div id="details">
+    <h2>Details</h2>
+    <p class="sub"><em>Miscellaneous statistics</em></p>
+    <p class="sub"><em><%= @hosts.size %> Hosts</em></p>
+  
+    <dl class="stat">
+      <h4>Memory</h4>
+      <dt>Used</dt>
+      <dd><%= number_to_human_size(@hosts.collect{|h| h.bytes if h.alive? }.compact.sum) %></dd>
+      <dt>Total</dt>
+      <dd><%= number_to_human_size( @hosts.collect{|h| h.limit_maxbytes if h.alive? }.compact.sum) %></dd>
+    </dl>
+  
+    <dl class="stat">
+      <h4>Accuracy</h4>
+      <dt>Hits</dt>
+      <dd><%= (@hosts.collect{|h| h.get_hits if h.alive? }.compact.sum) %></dd>
+      <dt>Misses</dt>
+      <dd><%= ( @hosts.collect{|h| h.get_misses if h.alive? }.compact.sum) %></dd>
+    </dl>
+  
+    <dl class="stat">
+      <h4>Access</h4>
+      <dt>Read</dt>
+      <dd><%= (@hosts.collect{|h| h.cmd_get if h.alive? }.compact.sum) %></dd>
+      <dt>Write</dt>
+      <dd><%= ( @hosts.collect{|h| h.cmd_set if h.alive? }.compact.sum) %></dd>
+    </dl>
+  
+    <dl class="stat">
+      <h4>Connections</h4>
+      <dt>Current</dt>
+      <dd><%= (@hosts.collect{|h| h.curr_connections if h.alive? }.compact.sum) %></dd>
+      <dt>Total</dt>
+      <dd><%= ( @hosts.collect{|h| h.total_connections if h.alive? }.compact.sum) %></dd>
+    </dl>
+  
+    <dl class="stat">
+      <h4>Items</h4>
+      
+      <dt>Current</dt>
+      <dd><%= (@hosts.collect{|h| h.curr_items if h.alive? }.compact.sum) %></dd>
+      <dt>Total</dt>
+      <dd><%= ( @hosts.collect{|h| h.total_items if h.alive? }.compact.sum) %></dd>
+    </dl>
+  </div>
+
 <div id="overall">
   <h2>Overview</h2>
   <p class="sub"><em>For all active hosts</em></p>
