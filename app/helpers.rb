@@ -1,4 +1,4 @@
-Dir["#{File.dirname(__FILE__)}/helpers/*.rb"].each &method(:require)
+Dir["#{File.dirname(__FILE__)}/helpers/*.rb"].each{|r| require r}
 
 module Amnesia
   module Helpers

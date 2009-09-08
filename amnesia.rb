@@ -11,7 +11,7 @@ require 'active_support'
 require 'gchart' # gchart, on github
 
 # Core extensions
-Dir["app/core_ext/*.rb"].each &method(:require)
+Dir["app/core_ext/*.rb"].each {|r| require r}
 
 $:.unshift "#{File.dirname(__FILE__)}/app"
 
