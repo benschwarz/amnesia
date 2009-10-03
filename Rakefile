@@ -3,7 +3,7 @@ require 'spec/rake/spectask'
 
 namespace :db do
   task :connect do
-    Amnesia.new
+    Amnesia::Application.new
   end
   
   desc "Auto migrate the database"
