@@ -1,8 +1,9 @@
 class Host
-  include DataMapper::Resource
+  attr_reader :address
   
-  property :id, Serial
-  property :address, String
+  def initialize(address)
+    @address = address
+  end
   
   def alive? 
     return true if connection.stats
@@ -23,6 +24,6 @@ class Host
   private
   
   def connection
-    @connection ||= MemCache.new(self.address)
+    @connection ||= MemCache.new(@address)
   end
 end

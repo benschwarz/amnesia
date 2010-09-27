@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %title Amnesia
+    %link{rel: "stylesheet", href: "/css/reset.css"}
+    %link{rel: "stylesheet", href: "/css/application.css"}
+  %body
+    %header
+      %h1
+        %a{href: '/amnesia'} Amnesia
+      %p Statistics for Memcached. Wait—What?
+    %section#main
+      = yield
