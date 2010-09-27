@@ -1,2 +1,6 @@
-require 'amnesia'
-run Amnesia::Application
+$LOAD_PATH << File.dirname(__FILE__)
+
+require 'lib/amnesia'
+
+use Amnesia::Application, :hosts => ['localhost:11211', 'localhost:0987']
+run Sinatra::Application
