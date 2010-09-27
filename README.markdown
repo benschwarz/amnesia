@@ -43,6 +43,8 @@ Available for single instances only:
     use Amnesia::Application, :hosts => ["localhost:11211"]
     run Sinatra::Application
 
+### Then, cruise on over to `your-host.tld/amnesia`
+
 ## Potential issues
 
 * Hosts are listed as "Inactive" or "Not Responding"
