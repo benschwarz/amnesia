@@ -3,7 +3,6 @@
   %head
     %meta{charset: "utf-8"}
     %title Amnesia
-    %link{rel: "stylesheet", href: "/css/reset.css"}
     %link{rel: "stylesheet", href: "/css/application.css"}
   %body
     %header
@@ -12,3 +11,9 @@
       %p Statistics for Memcached. Wait—What?
     %section#main
       = yield
+    %footer
+      %p 
+        Another
+        %a{:href => "http://germanforblack.com"} Ben Schwarz
+        joint. Get the 
+        %a{:href => "http://github.com/benschwarz/amnesia"} Source.

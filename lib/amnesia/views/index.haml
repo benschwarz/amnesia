@@ -1,25 +1,34 @@
 - if @hosts.any?{|host| host.alive? }
   %section#overall
     %section.stats.graph
-      %img{src: graph_url([@hosts.collect{|h| h.get_hits if h.alive? }.compact.sum, @hosts.collect{|h| h.get_misses if h.alive? }.compact.sum])}
+      %img{:src => graph_url([@hosts.collect{|h| h.get_hits if h.alive? }.compact.sum, @hosts.collect{|h| h.get_misses if h.alive? }.compact.sum])}
       %h3
         %span.graph-indicator Hit
         \/ Miss
       %p The amount of returned caches vs misses, misses usually require your application servers to work harder.
     %section.stats.graph
-      %img{src: graph_url([@hosts.collect{|h| h.cmd_get if h.alive? }.compact.sum, @hosts.collect{|h| h.cmd_set if h.alive? }.compact.sum])}
+      %img{:src => graph_url([@hosts.collect{|h| h.cmd_get if h.alive? }.compact.sum, @hosts.collect{|h| h.cmd_set if h.alive? }.compact.sum])}
       %h3
         %span.graph-indicator Read
         \/ Write
       %p More writes than reads can often mean that you’re caching too early, or that you’ve not been monitoring for very long.
   
     %section.stats.graph
-      %img{src: graph_url([@hosts.collect{|h| h.bytes if h.alive? }.compact.sum, @hosts.collect{|h| h.limit_maxbytes if h.alive? }.compact.sum])}
+      %img{:src => graph_url([@hosts.collect{|h| h.bytes if h.alive? }.compact.sum, @hosts.collect{|h| h.limit_maxbytes if h.alive? }.compact.sum])}
       %h3
         %span.graph-indicator Used Memory
         \/ Free Memory
       %p The cumulative amount of free memory and total memory across all active hosts.
 
-%section#hosts
+%nav#hosts
+  %p.sub Active Hosts
+  %ul
   - for host in @hosts
-    %a{href: "/amnesia/" + host.address }= host.address
+    - if host.alive?
+      %li
+        %a{:href => "/amnesia/" + host.address }= host.address
+    - else
+      %li.inactive
+        = host.address
+        (Inactive)
+      
