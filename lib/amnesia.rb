@@ -51,9 +51,5 @@ module Amnesia
       @host = Host.new(params[:host])
       haml :host
     end
-
-    not_found do
-      haml :not_found
-    end
   end
 end
