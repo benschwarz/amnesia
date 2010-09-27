@@ -1,32 +1,38 @@
-body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0 auto; width: 605px; }
-.container { width: 605px; margin: 0 auto; }
+/* HTML5 */
+header, footer, article, section, aside, nav, menu, figure { display: block; }
+
+/* Resets */
+body, h1, h2, h3, h4, h5, h6, p, a, ul, ol, dl, dt, dd, table, caption, th, td, fieldset, legend, blockquote { font-weight: normal; margin: 0; padding: 0; color: inherit; list-style-type: none; }
+a img, form, legend { border: 0; }
+
+/* Layout */
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0 auto; width: 450px; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 
 h1, h2, h3 { color: #1f1f1f; }
 img { display: block; }
-a { color: #1f1f1f; }
+a { color: inherit; }
 
 header { margin: 1em 0; }
 header h1 { font-size: 3.5em; }
 header h1 a { color: #1f1f1f; text-decoration: none; }
+header h1 a:hover:after { content: "—Huh?";}
 header p { font-size: 0.8em; color: #454545; }
 
-section#main h2 { font-size: 2.1em; }
-section#main p.sub { color: #666; font-size: 0.9em; font-style: italic; }
+section#main h2 { font-size: 1em; float: right; }
+section#main p.sub {  color: #666; font-size: 0.9em; font-style: italic; }
 
-section#main .stats { width: 480px; line-height: 1.2em; clear: left; padding: 35px 0; border-bottom: 1px solid #CCC; }
-section#main .graph img { position: absolute; margin-top: -25px; }
-section#main .stats h3 { font-size: 1.1em; margin-left: 160px; line-height: 1.5em; }
-section#main .stats p { font-size: 0.75em; color: #454545; margin-left: 160px; }
+section#main .stats { clear: left; padding: 1.75em 0; }
+section#main :last-child { border: none; }
+section#main .graph img { float: left; margin-top: -1.5em; margin-left: -1em; }
+section#main .stats h3 { font-size: 1.1em; margin-left: 110px; line-height: 1.5em; }
+section#main .stats p { line-height: 1.4em; font-size: 0.75em; color: #454545; margin-left: 110px; }
 
 section#main .stats h3 span.graph-indicator { color: #ff9900; }
 
-section#main div#details { position: absolute; top: 0; left: 560px; width: 220px; }
+nav#hosts { clear: left; margin: 2em 0; }
+nav#hosts li { margin: 0.5em 0; }
+nav#hosts li.inactive { color: #999; }
 
-section#main div#details h4 { margin-bottom: 20px; }
-
-section#main div#details dl.stat { padding-top: 40px; margin: 0; font-size: 0.9em; position: relative; }
-dl.stat dt, 
-dl.stat dd { color: #454545; }
-section#main div#details dl.stat dd { position: absolute; right: 0; margin-top: -0.9em;}
-
-a#back { position: absolute; left: -160px; font-size: 0.8em; margin-top: 1.3em; }
+footer { margin-top: 2em; border-top: 0.1em dotted #eee; width: 50%; margin: 2em auto; padding: 0.5em 0; }
+footer p { font-size: 0.6em; color: #ccc; text-align: center; }
+footer p a:hover { color: #999; }
