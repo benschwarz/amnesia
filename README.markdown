@@ -4,7 +4,7 @@ Amnesia is what you get when you lose your memory.
 
 Hopefully with Amnesia you'll know exactly whats happening with memory when it comes to memcached.
 
-![Amnesia screen shot](http://img.skitch.com/20090217-cfrqkent9df5fkgujkdy9r1r8w.jpg "Amnesia")
+![Amnesia screen shot](http://farm5.static.flickr.com/4125/5030135910_698fdb4514_z_d.jpg "Amnesia")
 
 ## Why?
 
@@ -33,32 +33,15 @@ Available for single instances only:
 
 ## Installation / Getting started
 
-Install a plethora of dependencies, I really wanted to make amnesia a gem, but being that its an application, it would mean more meaningless coding for me than I really want to do.
+    gem install amnesia
 
-    sudo gem install sinatra dm-core do_sqlite3 memcache-client activesupport gchart rspec
+### How to run it alongside your application
 
-I recommend that you stick to using sqlite3 in production, the persistance side of Amnesia is _very_ light.
-
-Use capistrano, vlad or dump it straight onto your server, you'll need to rename amnesia.yml.example to amnesia.yml and make some changes. 
-
-### Authentication
-
-If you don't want authentication, remove the auth block from amnesia.yml
-
-Be sure to set your `RackEnv` environment variable and run `rake db:migrate`, this will create your database (when using sqlite3, Mysql users will need to create the db themselves prior)
-
-### Servers
-
-If you plan to run Amnesia on a VPS, I recommend that you use Passenger, this is just so that you can claim back your memory when Amnesia isn't in use. Having said that, it'll work with any Rack based Ruby web server. 
-
-You can install Apache, Passenger and Ruby Enterprise (with other friends if you like) quickly using [passenger-stack](http://benschwarz.github.com/passenger-stack)
-
-The config.ru file provided should be fine to use in production.
-
-When passenger isn't an option, or you want to keep things simple, you can always run your app with the `rackup` command:
-
-      # Start on port 80 using mongrel
-      rackup config.ru -p 80 -s mongrel
+"config.ru":
+  
+    require 'amnesia'
+    use Amnesia::Application, :hosts => ["localhost:11211"]
+    run Sinatra::Application
 
 ## Potential issues
 
@@ -75,11 +58,10 @@ You won't need to do this unless you've explicitly blocked ports to your server.
 
 Let me know if you come accross any issues using Github messaging.
 
+## Something missing? 
+
+Amnesia used to be a full blown application that required a datamapper sqlite database, yml file for configuration and a bit of pain to get deployed. I decided these were all false constraints and wrapped it up as a middleware instead. Now—You can drop it alongside your rails/sinatra/rack application and see what the hell is going on with Memcached. 
+
 ## Licence
 
 MIT, See `LICENCE` file.
-
-## Thanks
-
-To the [Integrity](http://github.com/foca/integrity) project for having a Sinatra app open source with some clever ideas, I pinched some of them.
-This was my first real play with Sinatra and I throughly enjoyed it. (and I got to build an app that I actually needed)
