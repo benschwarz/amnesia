@@ -19,6 +19,7 @@ module Amnesia
 
     def initialize(app, configuration = {})
       Amnesia.config = configuration
+      Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
       super(app)
     end
     
