@@ -8,24 +8,25 @@ module Amnesia
   
     def alive? 
       return true if connection.stats
-    rescue MemCache::MemCacheError
+    rescue Memcached::Error
       return false
     end
   
     def method_missing(method, *args)
-      return stats[method.to_s] if stats.has_key? method.to_s
+      stats[method.to_s.to_sym][0] if stats.has_key? method.to_s.to_sym
     end
   
     def stats
       connection.stats[connection.stats.keys.first]
-    rescue MemCache::MemCacheError
+      connection.stats
+    rescue Memcached::Error
       return {}
     end
   
     private
   
     def connection
-      @connection ||= MemCache.new(@address)
+      @connection ||= Memcached.new(@address)
     end
   end
 end
