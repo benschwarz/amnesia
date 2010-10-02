@@ -3,7 +3,6 @@ require 'dalli'
 require 'gchart'
 require 'haml'
 
-$:<< File.dirname(__FILE__)
 
 require 'amnesia/host'
 require 'core_ext/array'
