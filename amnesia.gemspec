@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   
   s.add_dependency "sinatra", ">= 1.0"
-  s.add_dependency "memcached-northscale", ">= 0.19.5.4"
+  s.add_dependency "dalli", ">= 0.9.8"
   s.add_dependency "gchart", "= 1.0.0"
   s.add_dependency "haml", ">= 3.0.0"
   
