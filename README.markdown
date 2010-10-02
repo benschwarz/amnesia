@@ -8,7 +8,7 @@ Hopefully with Amnesia you'll know exactly whats happening with memory when it c
 
 ## Why?
 
-Its always nice to have some statistics to see how everything is performing within your stack. Memcached seems to be a  mystery box that people don't really pay alot of attention to.
+Its always nice to have some statistics to see how everything is performing within your stack. Memcached seems to be a  mystery box that people don't really pay a lot of attention to.
 
 Amnesia tells you how your application is performing, when it misses, when it is running sweet, when you're about to run out of memcached and (perhaps) fall down in a screaming heap.
 
@@ -16,7 +16,7 @@ Amnesia tells you how your application is performing, when it misses, when it is
 
 All stats are since each memcached instance was restarted
 
-Available as a cumluative result of all your memcached instances, or single instances alone:
+Available as a cumulative result of all your memcached instances, or single instances alone:
 
 * Cache hits and misses
 * Reads and writes
@@ -40,10 +40,38 @@ Available for single instances only:
 "config.ru":
   
     require 'amnesia'
-    use Amnesia::Application, :hosts => ["localhost:11211"]
+    use Amnesia::Application
     run Sinatra::Application
 
 ### Then, cruise on over to `your-host.tld/amnesia`
+
+
+## Configuration options
+
+### Hosts
+Amnesia will work automagically if you drop it on a Heroku powered app, likewise—for a "standard" memcache host (running on localhost:11211, the default.).
+
+When you need to specify where your memcache hosts can be found, you can either set an environment variable: 
+
+    ENV["MEMCACHE_SERVERS"] = ['localhost:11211']
+
+or alternately, you can set it within your `config.ru`:
+
+    use Amnesia::Application, :hosts => ["mc1.yourapp.com:11211", "mc2.yourapp.com:11211"]
+
+### Authentication
+
+When you want to keep your Amnesia data private, you can set an environment variable that will enable http basic authentication: 
+
+    ENV["AMNESIA_CREDS"] = ben:schwarz
+    
+in your shell, you might do it like this: 
+
+    export AMNESIA_CREDS=ben:schwarz
+    
+on heroku, like this:
+
+    heroku config:add AMNESIA_CREDS=ben:schwarz
 
 ## Potential issues
 
