@@ -27,7 +27,7 @@ section#main .graph img { float: left; margin-top: -1.5em; margin-left: -1em; }
 section#main .stats h3 { font-size: 1.1em; margin-left: 110px; line-height: 1.5em; }
 section#main .stats p { line-height: 1.4em; font-size: 0.75em; color: #454545; margin-left: 110px; }
 
-section#main .stats h3 span.graph-indicator { color: #ff9900; }
+section#main .stats h3 span.graph-indicator { color: #ee9900; }
 
 nav#hosts { clear: left; margin: 2em 0; }
 nav#hosts li { margin: 0.5em 0; }
