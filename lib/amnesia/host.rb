@@ -11,12 +11,11 @@ module Amnesia
     end
   
     def method_missing(method, *args)
-      stats[method.to_s.to_sym].sum if stats.has_key? method.to_s.to_sym
+      stats[method.to_s].to_i
     end
   
     def stats
-      connection.stats[connection.stats.keys.first]
-      connection.stats
+      connection.stats[address]
     rescue Memcached::Error
       return {}
     end
@@ -28,7 +27,7 @@ module Amnesia
     private
   
     def connection
-      @connection ||= @address ? Memcached.new(@address) : Memcached.new
+      @connection ||= @address ? Dalli::Client.new(@address) : Memcached.new
     end
   end
 end
