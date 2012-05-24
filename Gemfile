@@ -2,5 +2,5 @@ source :rubyforge
 
 gem "sinatra"
 gem "gchart"
-gem "memcache-client"
+gem "memcached-northscale"
 gem "haml"

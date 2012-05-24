@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'memcache'
+require 'memcached'
 require 'gchart'
 require 'haml'
 
@@ -19,6 +19,10 @@ module Amnesia
 
     def initialize(app, configuration = {})
       Amnesia.config = configuration
+      # Heroku
+      Amnesia.config[:hosts] ||= [nil] if ENV['MEMCACHE_SERVERS']
+      # Default if nothing set
+      Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
       super(app)
     end
     
@@ -40,14 +44,33 @@ module Amnesia
        rescue
          nil
        end
+
+      def protected!
+        unless authorized?
+          response['WWW-Authenticate'] = %(Basic realm="Amnesia")
+          throw(:halt, [401, "Not authorized\n"])
+        end
+      end
+
+      def authorized?
+        if ENV['AMNESIA_CREDS']
+          @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+          @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ENV['AMNESIA_CREDS'].split(':')
+        else
+          # No auth needed.
+          true
+        end
+      end
     end
     
     get '/amnesia' do
+      protected!
       @hosts = Amnesia.config[:hosts].map{|host| Amnesia::Host.new(host)}
       haml :index
     end
 
     get '/amnesia/:host' do
+      protected!
       @host = Amnesia::Host.new(params[:host])
       haml :host
     end

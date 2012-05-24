@@ -1,31 +1,34 @@
 module Amnesia
   class Host
-    attr_reader :address
-  
     def initialize(address)
       @address = address
     end
   
     def alive? 
       return true if connection.stats
-    rescue MemCache::MemCacheError
+    rescue Memcached::Error
       return false
     end
   
     def method_missing(method, *args)
-      return stats[method.to_s] if stats.has_key? method.to_s
+      stats[method.to_s.to_sym].sum if stats.has_key? method.to_s.to_sym
     end
   
     def stats
       connection.stats[connection.stats.keys.first]
-    rescue MemCache::MemCacheError
+      connection.stats
+    rescue Memcached::Error
       return {}
+    end
+
+    def address
+      @address || @connection.servers.join(', ')
     end
   
     private
   
     def connection
-      @connection ||= MemCache.new(@address)
+      @connection ||= @address ? Memcached.new(@address) : Memcached.new
     end
   end
 end
