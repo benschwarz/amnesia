@@ -27,7 +27,7 @@ module Amnesia
     
     helpers do
       def graph_url(data = [])
-        Gchart.pie(:data => data, :size => '115x115').to_url
+        Gchart.pie(:data => data, :size => '115x115')
       end
       
       def number_to_human_size(size, precision=1)
