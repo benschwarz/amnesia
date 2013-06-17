@@ -35,13 +35,30 @@ Available for single instances only:
 
     gem install amnesia
 
-### How to run it alongside your application
+### How to run it alongside your Rack application
 
 "config.ru":
   
     require 'amnesia'
-    use Amnesia::Application
-    run Sinatra::Application
+    rack_app = Rack::Builder.app do
+      map "/amnesia" do
+        run Amnesia::Application
+      end
+      run YourSinatra::Application
+    end
+    run rack_app 
+
+### How to run it alongside your Rails application
+
+"Gemfile":
+
+    gem 'amnesia', '>=1.0.2'
+
+
+"config/routes.rb":
+
+    mount Amnesia::Application => "/amnesia" 
+
 
 ### Then, cruise on over to `your-host.tld/amnesia`
 
