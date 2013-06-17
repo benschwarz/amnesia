@@ -1,3 +1,5 @@
+require 'dalli'
+
 module Amnesia
   class Host
     def initialize(address)
@@ -6,7 +8,7 @@ module Amnesia
   
     def alive? 
       return true if connection.stats
-    rescue Memcached::Error
+    rescue Dalli::DalliError
       return false
     end
   
@@ -15,8 +17,9 @@ module Amnesia
     end
   
     def stats
-      connection.stats[connection.stats.keys.first]
-      connection.stats
+      stats_val = connection.stats
+      stats_val[stats_val.keys.first]
+      stats_val
     rescue Memcached::Error
       return {}
     end
@@ -28,7 +31,7 @@ module Amnesia
     private
   
     def connection
-      @connection ||= @address ? Memcached.new(@address) : Memcached.new
+      @connection ||= @address ? Dalli::Client.new(@address) : Dalli::Client.new
     end
   end
 end
