@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   
   s.add_dependency "sinatra", ">= 1.0"
   s.add_dependency "dalli"
-  s.add_dependency "gchart", "= 1.0.0"
+  s.add_dependency "gchart", ">= 1.0.0"
   s.add_dependency "haml", ">= 3.0.0"
   
 end

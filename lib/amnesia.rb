@@ -1,4 +1,4 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'gchart'
 require 'haml'
 
@@ -16,13 +16,13 @@ module Amnesia
     set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
 
-    def initialize(app, configuration = {})
+    def initialize(configuration = {})
       Amnesia.config = configuration
       # Heroku
       Amnesia.config[:hosts] ||= [nil] if ENV['MEMCACHE_SERVERS']
       # Default if nothing set
       Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
-      super(app)
+      super()
     end
     
     helpers do
