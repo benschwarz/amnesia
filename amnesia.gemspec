@@ -6,7 +6,7 @@ require 'bundler/version'
 
 Gem::Specification.new do |s|
   s.name        = "amnesia"
-  s.version     = "1.0.1"
+  s.version     = "1.0.2"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ben Schwarz"]
   s.email       = ["ben.schwarz@gmail.com"]
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   
   s.add_dependency "sinatra", ">= 1.0"
-  s.add_dependency "memcached-northscale", ">= 0.19.5.4"
+  s.add_dependency "dalli"
   s.add_dependency "gchart", "= 1.0.0"
   s.add_dependency "haml", ">= 3.0.0"
   
