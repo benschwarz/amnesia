@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'memcached'
 require 'gchart'
 require 'haml'
 
