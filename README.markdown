@@ -42,7 +42,7 @@ Available for single instances only:
     require 'amnesia'
     rack_app = Rack::Builder.app do
       map "/amnesia" do
-        run Amnesia::Application
+        run Amnesia::Application.new
       end
       run YourSinatra::Application
     end
@@ -57,7 +57,7 @@ Available for single instances only:
 
 "config/routes.rb":
 
-    mount Amnesia::Application => "/amnesia" 
+    mount Amnesia::Application.new => "/amnesia" 
 
 
 ### Then, cruise on over to `your-host.tld/amnesia`
