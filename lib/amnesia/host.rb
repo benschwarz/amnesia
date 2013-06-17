@@ -31,7 +31,17 @@ module Amnesia
     private
   
     def connection
-      @connection ||= @address ? Dalli::Client.new(@address) : Dalli::Client.new
+      @connection ||= connect(@address)
     end
+    
+    def connect(address = nil)
+      if defined?(EM) && EM.respond_to?(:reactor_running?) && EM::reactor_running?
+        opts = {:async => true}
+      else
+        opts = {}
+      end
+      Dalli::Client.new(address, opts)
+    end
+    
   end
 end
