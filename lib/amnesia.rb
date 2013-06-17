@@ -13,7 +13,7 @@ module Amnesia
   end
   
   class Application < Sinatra::Base
-    set :public, File.join(File.dirname(__FILE__), 'amnesia', 'public')
+    set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
 
     def initialize(app, configuration = {})
