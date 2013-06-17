@@ -62,13 +62,13 @@ module Amnesia
       end
     end
     
-    get '/amnesia' do
+    get '/' do
       protected!
       @hosts = Amnesia.config[:hosts].map{|host| Amnesia::Host.new(host)}
       haml :index
     end
 
-    get '/amnesia/:host' do
+    get '/:host' do
       protected!
       @host = Amnesia::Host.new(params[:host])
       haml :host
