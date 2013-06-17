@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'gchart'
+require 'googlecharts'
 require 'haml'
 
 $:<< File.dirname(__FILE__)
@@ -27,7 +27,7 @@ module Amnesia
     
     helpers do
       def graph_url(data = [])
-        GChart.pie(:data => data, :size => '115x115').to_url
+        Gchart.pie(:data => data, :size => '115x115').to_url
       end
       
       def number_to_human_size(size, precision=1)
