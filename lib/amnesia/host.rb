@@ -13,13 +13,12 @@ module Amnesia
     end
   
     def method_missing(method, *args)
-      stats[method.to_s.to_sym].sum if stats.has_key? method.to_s.to_sym
+      stats[method.to_s].sum if stats.has_key? method.to_s
     end
   
     def stats
       stats_val = connection.stats
-      stats_val[stats_val.keys.first]
-      stats_val
+      stats_val.values.first
     rescue Dalli::DalliError
       return {}
     end
