@@ -20,7 +20,7 @@ module Amnesia
       stats_val = connection.stats
       stats_val[stats_val.keys.first]
       stats_val
-    rescue Memcached::Error
+    rescue Dalli::DalliError
       return {}
     end
 
