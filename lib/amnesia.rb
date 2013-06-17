@@ -19,7 +19,7 @@ module Amnesia
     def initialize(configuration = {})
       Amnesia.config = configuration
       # Heroku
-      Amnesia.config[:hosts] ||= [nil] if ENV['MEMCACHE_SERVERS']
+      Amnesia.config[:hosts] ||= [ENV["MEMCACHE_SERVERS"]] if ENV['MEMCACHE_SERVERS']
       # Default if nothing set
       Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
       super()
