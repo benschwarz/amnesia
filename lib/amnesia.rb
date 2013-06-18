@@ -1,6 +1,5 @@
-require 'sinatra'
-require 'memcached'
-require 'gchart'
+require 'sinatra/base'
+require 'googlecharts'
 require 'haml'
 
 $:<< File.dirname(__FILE__)
@@ -14,21 +13,21 @@ module Amnesia
   end
   
   class Application < Sinatra::Base
-    set :public, File.join(File.dirname(__FILE__), 'amnesia', 'public')
+    set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
 
-    def initialize(app, configuration = {})
+    def initialize(configuration = {})
       Amnesia.config = configuration
       # Heroku
-      Amnesia.config[:hosts] ||= [nil] if ENV['MEMCACHE_SERVERS']
+      Amnesia.config[:hosts] ||= [ENV["MEMCACHE_SERVERS"]].flatten if ENV['MEMCACHE_SERVERS']
       # Default if nothing set
       Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
-      super(app)
+      super()
     end
     
     helpers do
       def graph_url(data = [])
-        GChart.pie(:data => data, :size => '115x115').to_url
+        Gchart.pie(:data => data, :size => '115x115')
       end
       
       def number_to_human_size(size, precision=1)
@@ -63,13 +62,13 @@ module Amnesia
       end
     end
     
-    get '/amnesia' do
+    get '/' do
       protected!
       @hosts = Amnesia.config[:hosts].map{|host| Amnesia::Host.new(host)}
       haml :index
     end
 
-    get '/amnesia/:host' do
+    get '/:host' do
       protected!
       @host = Amnesia::Host.new(params[:host])
       haml :host

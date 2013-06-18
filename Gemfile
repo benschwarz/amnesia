@@ -1,6 +1,6 @@
 source :rubyforge
 
 gem "sinatra"
-gem "gchart"
-gem "memcached-northscale"
+gem "googlecharts"
+gem "dalli"
 gem "haml"

@@ -1,3 +1,5 @@
+require 'dalli'
+
 module Amnesia
   class Host
     def initialize(address)
@@ -6,18 +8,18 @@ module Amnesia
   
     def alive? 
       return true if connection.stats
-    rescue Memcached::Error
+    rescue Dalli::DalliError
       return false
     end
   
     def method_missing(method, *args)
-      stats[method.to_s.to_sym].sum if stats.has_key? method.to_s.to_sym
+      stats[method.to_s].sum if stats.has_key? method.to_s
     end
   
     def stats
-      connection.stats[connection.stats.keys.first]
-      connection.stats
-    rescue Memcached::Error
+      stats_val = connection.stats
+      stats_val.values.first
+    rescue Dalli::DalliError
       return {}
     end
 
@@ -28,7 +30,17 @@ module Amnesia
     private
   
     def connection
-      @connection ||= @address ? Memcached.new(@address) : Memcached.new
+      @connection ||= connect(@address)
     end
+    
+    def connect(address = nil)
+      if defined?(EM) && EM.respond_to?(:reactor_running?) && EM::reactor_running?
+        opts = {:async => true}
+      else
+        opts = {}
+      end
+      Dalli::Client.new(address, opts)
+    end
+    
   end
 end
