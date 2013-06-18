@@ -1,6 +1,2 @@
-source :rubyforge
-
-gem "sinatra"
-gem "googlecharts"
-gem "dalli"
-gem "haml"
+source "https://rubygems.org"
+gemspec
