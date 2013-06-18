@@ -11,7 +11,7 @@ module Amnesia
   class << self
     attr_accessor :config
   end
-  
+
   class Application < Sinatra::Base
     set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
@@ -24,12 +24,12 @@ module Amnesia
       Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
       super()
     end
-    
+
     helpers do
       def graph_url(data = [])
         Gchart.pie(:data => data, :size => '115x115')
       end
-      
+
       def number_to_human_size(size, precision=1)
          size = Kernel.Float(size)
          case
@@ -61,7 +61,7 @@ module Amnesia
         end
       end
     end
-    
+
     get '/' do
       protected!
       @hosts = Amnesia.config[:hosts].map{|host| Amnesia::Host.new(host)}

@@ -12,7 +12,7 @@
         %span.graph-indicator Read
         \/ Write
       %p More writes than reads can often mean that you’re caching too early, or that you’ve not been monitoring for very long.
-  
+
     %section.stats.graph
       %img{:src => graph_url([@hosts.collect{|h| h.bytes if h.alive? }.compact.sum, @hosts.collect{|h| h.limit_maxbytes if h.alive? }.compact.sum])}
       %h3
@@ -31,4 +31,3 @@
       %li.inactive
         = host.address
         (Inactive)
-      

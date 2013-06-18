@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
- 
+
 require 'bundler/version'
 
 Gem::Specification.new do |s|
@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.description = "With Amnesia you'll know exactly whats happening with memory when it comes to memcached."
   s.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENCE README.markdown)
   s.require_path = 'lib'
-  
+
   s.add_dependency "sinatra", ">= 1.0"
   s.add_dependency "dalli"
   s.add_dependency "googlecharts"
   s.add_dependency "haml", ">= 3.0.0"
-  
+
 end
