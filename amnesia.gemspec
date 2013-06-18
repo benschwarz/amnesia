@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
   s.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENCE README.markdown)
   s.require_path = 'lib'
 
-  s.add_dependency "sinatra", ">= 1.0"
-  s.add_dependency "dalli"
-  s.add_dependency "googlecharts"
-  s.add_dependency "haml", ">= 3.0.0"
+  s.add_dependency "sinatra", "~> 1.4.3"
+  s.add_dependency "dalli", "~> 2.6.4"
+  s.add_dependency "googlecharts", "~> 1.6.8"
+  s.add_dependency "haml", "~> 4.0.3"
 
 end
