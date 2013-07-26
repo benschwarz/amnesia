@@ -3,11 +3,11 @@
   %head
     %meta{:charset => "utf-8"}
     %title Amnesia
-    %link{:rel => "stylesheet", :href => "/amnesia/css/application.css"}
+    %link{:rel => "stylesheet", :href => url("/css/application.css")}
   %body
     %header
       %h1
-        %a{:href => '/amnesia'} Amnesia
+        %a{:href => url('/')} Amnesia
       %p Statistics for Memcached. Wait—What?
     %section#main
       = yield
