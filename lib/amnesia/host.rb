@@ -13,7 +13,7 @@ module Amnesia
     end
 
     def method_missing(method, *args)
-      stats[method.to_s].sum if stats.has_key? method.to_s
+      stats[method.to_s] if stats.has_key? method.to_s
     end
 
     def stats
