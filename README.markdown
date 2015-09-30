@@ -103,7 +103,7 @@ Within my slices, I punched a hole through `iptables`
 
 You won't need to do this unless you've explicitly blocked ports to your server. (When in doubt, block nearly everything)
 
-Let me know if you come accross any issues using Github messaging.
+Let me know if you come across any issues using Github messaging.
 
 ## Something missing? 
 
