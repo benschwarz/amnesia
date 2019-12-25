@@ -8,5 +8,5 @@ require 'lib/amnesia'
 Encoding.default_internal = 'utf-8'
 Encoding.default_external = 'utf-8'
 
-use Amnesia::Application # optional config: , hosts: ['localhost:11211', 'localhost:0987']
+use Amnesia::Application, hosts: ['localhost:11211', 'example.local:10987']
 run Sinatra::Application
