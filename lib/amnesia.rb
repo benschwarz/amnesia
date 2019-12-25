@@ -56,9 +56,16 @@ module Amnesia
     end
 
     get '/:host' do
-      halt 404 unless Amnesia.config[:hosts].include? params[:host]
-      @host = Amnesia::Host.new(params[:host])
-      haml :host
+      if known_host? params[:host]
+        @host = Amnesia::Host.new(params[:host])
+        haml :host
+      else
+        halt 404
+      end
+    end
+
+    def known_host? host
+      Amnesia.config[:hosts].include? params[:host]
     end
   end
 end
