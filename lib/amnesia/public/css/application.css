@@ -1,56 +1,87 @@
-/* HTML5 */
-header, footer, article, section, aside, nav, menu, figure { display: block; }
+body, h1, h2, h3, h4, h5, h6, p, a, ul, ol, dl, dt, dd, table, caption, th, td,
+fieldset, legend, blockquote {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  list-style-type: none;
+}
+a img, form, legend {border: 0; }
 
-/* Resets */
-body, h1, h2, h3, h4, h5, h6, p, a, ul, ol, dl, dt, dd, table, caption, th, td, fieldset, legend, blockquote { font-weight: normal; margin: 0; padding: 0; color: inherit; list-style-type: none; }
-a img, form, legend { border: 0; }
+html { color: #454545;}
 
-/* Layout */
-body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0 auto; width: 450px; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  padding: 0 1em;
+  max-width: 450px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
 
-h1, h2, h3 { color: #1f1f1f; }
 img { display: block; }
-a { color: inherit; }
+a:hover { color: #000; }
 
 header { margin: 1em 0; }
-header h1 { font-size: 3.5em; }
-header h1 a { color: #1f1f1f; text-decoration: none; }
-header h1 a:hover:after { content: "—Huh?";}
-header p { font-size: 0.8em; color: #454545; }
+.brand { font-size: 3.5em; }
+.brand a { display: block; text-decoration: none; }
+.brand a:hover:after { content: "—Huh?";}
 
-section#main h2 { font-size: 1em; float: right; }
-section#main p.sub {  color: #666; font-size: 0.9em; font-style: italic; }
+.host {
+  font-size: 1em;
+  color: #fff;
+}
+.host-address {
+  font-weight: bold;
+  color: #ff9900;
+  border-radius: 2px;
+  font-size: 0.9em;
+}
+.host-details {
+  color: #000;
+  padding: 2px 4px;
+}
 
-section#main .stats { clear: left; padding: 1.75em 0; }
-section#main :last-child { border: none; }
-section#main .graph img { float: left; margin-top: -1.5em; margin-left: -1em; }
-section#main .stats h3 { font-size: 1.1em; margin-left: 110px; line-height: 1.5em; }
-section#main .stats p { line-height: 1.4em; font-size: 0.75em; color: #454545; margin-left: 110px; }
+.stats {
+  display: flex;
+  align-items: center;
+  margin: 2em 0;
+}
+.stats-graph img { margin-left: -10px; }
+.stats-text {
+  flex: 1 1;
+  margin-left: 1em;
+}
 
-section#main .stats h3 span.graph-indicator { color: #ff9900; }
+.graph-indicator { color: #ff9900; }
 
-nav#hosts { clear: left; margin: 2em 0; }
-nav#hosts li { margin: 0.5em 0; }
-nav#hosts li.inactive { color: #999; }
+.alive-host,
+.dead-host {
+  margin: 0.5em 0;
+}
+.dead-host { color: #999; }
 
-footer { margin-top: 2em; border-top: 0.1em dotted #eee; width: 50%; margin: 2em auto; padding: 0.5em 0; }
-footer p { font-size: 0.6em; color: #ccc; text-align: center; }
-footer p a:hover { color: #999; }
+footer {
+  margin-top: 2em;
+  border-top: 0.1em solid #ccc;
+  margin: 2em auto;
+  padding: 0.5em 0;
+  font-size: 0.8em;
+  color: #ccc;
+  text-align: center;
+}
+footer a:hover { color: #999; }
 
 @media (prefers-color-scheme: dark) {
   html {
     background: black;
     color: white;
-  }
-  a,
-  h1, h2, h3,
-  header h1 a,
-  header p,
-  section#main .stats p {
     color: #ccc;
   }
-  section#main p.sub { color: #999; }
-  footer { border-color: #454545; }
-  footer p { color: #454545; }
-  footer a { color: #454545; }
+  a:hover { color: #fff; }
+  footer { border-color: #454545; color: #454545; }
+  .host-details {
+    color: #fff;
+  }
+
 }

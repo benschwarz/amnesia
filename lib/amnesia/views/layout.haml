@@ -6,10 +6,10 @@
     %link{rel: "stylesheet", href: url("/css/application.css")}
   %body
     %header
-      %h1
+      %h1.brand
         %a{href: url('/')} Amnesia
       %p Statistics for Memcached. Wait—What?
-    %section#main
+    %main
       = yield
     %footer
       %p
