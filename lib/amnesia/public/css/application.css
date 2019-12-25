@@ -36,3 +36,21 @@ nav#hosts li.inactive { color: #999; }
 footer { margin-top: 2em; border-top: 0.1em dotted #eee; width: 50%; margin: 2em auto; padding: 0.5em 0; }
 footer p { font-size: 0.6em; color: #ccc; text-align: center; }
 footer p a:hover { color: #999; }
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background: black;
+    color: white;
+  }
+  a,
+  h1, h2, h3,
+  header h1 a,
+  header p,
+  section#main .stats p {
+    color: #ccc;
+  }
+  section#main p.sub { color: #999; }
+  footer { border-color: #454545; }
+  footer p { color: #454545; }
+  footer a { color: #454545; }
+}
