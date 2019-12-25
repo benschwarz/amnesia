@@ -2,6 +2,9 @@ require 'dalli'
 
 module Amnesia
   class Host
+    FLOAT_STATS  = %w[ rusage_user rusage_system ]
+    STRING_STATS = %w[ version libevent ]
+
     def initialize(address)
       @address = address
     end
@@ -13,7 +16,18 @@ module Amnesia
     end
 
     def method_missing(method, *args)
-      stats[method.to_s].sum if stats.has_key? method.to_s
+      if stats.has_key? method.to_s
+        value = stats[method.to_s]
+        if FLOAT_STATS.include? method
+          Float(value)
+        elsif STRING_STATS.include? method
+          value
+        else
+          Integer(value)
+        end
+      else
+        super
+      end
     end
 
     def stats
