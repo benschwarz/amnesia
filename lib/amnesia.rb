@@ -25,6 +25,11 @@ module Amnesia
       super()
     end
 
+    use Rack::Auth::Basic, "Amnesia" do |username, password|
+      user, pass = ENV['AMNESIA_CREDS'].split(':')
+      username == user and password == pass
+    end if ENV['AMNESIA_CREDS']
+
     helpers do
       def graph_url(data = [])
         Gchart.pie(:data => data, :size => '115x115')
@@ -43,33 +48,14 @@ module Amnesia
        rescue
          nil
        end
-
-      def protected!
-        unless authorized?
-          response['WWW-Authenticate'] = %(Basic realm="Amnesia")
-          throw(:halt, [401, "Not authorized\n"])
-        end
-      end
-
-      def authorized?
-        if ENV['AMNESIA_CREDS']
-          @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-          @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ENV['AMNESIA_CREDS'].split(':')
-        else
-          # No auth needed.
-          true
-        end
-      end
     end
 
     get '/' do
-      protected!
       @hosts = Amnesia.config[:hosts].map{|host| Amnesia::Host.new(host)}
       haml :index
     end
 
     get '/:host' do
-      protected!
       halt 404 unless Amnesia.config[:hosts].include? params[:host]
       @host = Amnesia::Host.new(params[:host])
       haml :host

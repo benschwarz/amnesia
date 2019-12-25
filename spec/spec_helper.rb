@@ -1,10 +1,10 @@
-require 'bundler/setup'
-require 'amnesia'
-require 'rack/test'
 require 'rspec'
 
 ENV['RACK_ENV'] ||= 'test'
 ENV['AMNESIA_CREDS'] ||= 'admin:amnesia'
+
+require 'rack/test'
+require 'amnesia'
 
 module TestedApp
   include Rack::Test::Methods
