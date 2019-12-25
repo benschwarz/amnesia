@@ -8,21 +8,17 @@ require 'amnesia/host'
 require 'core_ext/array'
 
 module Amnesia
-  class << self
-    attr_accessor :config
-  end
-
   class Application < Sinatra::Base
     set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
 
-    def initialize(app = nil, configuration = {})
-      Amnesia.config = configuration
-      # Heroku
-      Amnesia.config[:hosts] ||= [ENV["MEMCACHE_SERVERS"]].flatten if ENV['MEMCACHE_SERVERS']
-      # Default if nothing set
-      Amnesia.config[:hosts] ||= ['127.0.0.1:11211']
-      super()
+    def initialize(app = nil, options = {})
+      @hosts = build_hosts options[:hosts] || ENV['MEMCACHE_SERVERS'] || '127.0.0.1:11211'
+      super app
+    end
+
+    def build_hosts addresses
+      Array(addresses).flatten.map { |address| Amnesia::Host.new address }
     end
 
     use Rack::Auth::Basic, "Amnesia" do |username, password|
@@ -51,21 +47,16 @@ module Amnesia
     end
 
     get '/' do
-      @hosts = Amnesia.config[:hosts].map{|host| Amnesia::Host.new(host)}
       haml :index
     end
 
-    get '/:host' do
-      if known_host? params[:host]
-        @host = Amnesia::Host.new(params[:host])
-        haml :host
-      else
-        halt 404
-      end
+    get '/:address' do
+      @host = find_host params[:address]
+      @host ? haml(:host) : halt(404)
     end
 
-    def known_host? host
-      Amnesia.config[:hosts].include? params[:host]
+    def find_host address
+      @hosts.find { |h| h.address == address }
     end
   end
 end
