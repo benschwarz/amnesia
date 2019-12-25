@@ -16,7 +16,7 @@ module Amnesia
     set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
 
-    def initialize(configuration = {})
+    def initialize(app = nil, configuration = {})
       Amnesia.config = configuration
       # Heroku
       Amnesia.config[:hosts] ||= [ENV["MEMCACHE_SERVERS"]].flatten if ENV['MEMCACHE_SERVERS']
@@ -70,6 +70,7 @@ module Amnesia
 
     get '/:host' do
       protected!
+      halt 404 unless Amnesia.config[:hosts].include? params[:host]
       @host = Amnesia::Host.new(params[:host])
       haml :host
     end

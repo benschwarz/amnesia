@@ -18,9 +18,7 @@ module Amnesia
 
     def stats
       stats_val = connection.stats
-      stats_val.values.first
-    rescue Dalli::DalliError
-      return {}
+      stats_val.values.first || {}
     end
 
     def address
