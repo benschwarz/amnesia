@@ -7,7 +7,7 @@ module Amnesia
     end
 
     def alive?
-      return true if connection.stats
+      return true if connection.stats[@address]
     rescue Dalli::DalliError
       return false
     end
