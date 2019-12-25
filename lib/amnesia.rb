@@ -19,6 +19,7 @@ module Amnesia
     end
 
     def build_hosts addresses
+      addresses = addresses.split "," if addresses.is_a? String
       Array(addresses).flatten.map { |address| Amnesia::Host.new address }
     end
 
