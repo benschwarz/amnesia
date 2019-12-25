@@ -74,7 +74,7 @@ When you need to specify where your memcache hosts can be found, you can either 
 
 or alternately, you can set it within your `config.ru`:
 
-    use Amnesia::Application, :hosts => ["mc1.yourapp.com:11211", "mc2.yourapp.com:11211"]
+    use Amnesia::Application, hosts: ["mc1.yourapp.com:11211", "mc2.yourapp.com:11211"]
 
 ### Authentication
 

@@ -33,7 +33,7 @@ module Amnesia
 
     def connect(address = nil)
       if defined?(EM) && EM.respond_to?(:reactor_running?) && EM::reactor_running?
-        opts = {:async => true}
+        opts = {async: true}
       else
         opts = {}
       end

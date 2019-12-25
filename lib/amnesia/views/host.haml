@@ -2,7 +2,7 @@
 %p.sub #{@host.curr_items} item/s in cache, with #{@host.curr_connections} active connections
 
 %section.stats.graph
-  %img{:src => graph_url([@host.bytes, @host.limit_maxbytes]) }
+  %img{src: graph_url([@host.bytes, @host.limit_maxbytes]) }
   %h3
     %span.graph-indicator Used Memory (#{number_to_human_size(@host.bytes)})
     \/ Free Memory (#{number_to_human_size(@host.limit_maxbytes)})
@@ -10,14 +10,14 @@
 
 
 %section.stats.graph
-  %img{:src => graph_url([@host.get_hits, @host.get_misses]) }
+  %img{src: graph_url([@host.get_hits, @host.get_misses]) }
   %h3
     %span.graph-indicator Hit (#{@host.get_hits})
     \/ Miss (#{@host.get_misses})
   %p The amount of returned caches vs misses, misses usually require your application servers to work harder.
 
 %section.stats.graph
-  %img{:src => graph_url([@host.cmd_get, @host.cmd_set]) }
+  %img{src: graph_url([@host.cmd_get, @host.cmd_set]) }
   %h3
     %span.graph-indicator Read (#{@host.cmd_get})
     \/ Write (#{@host.cmd_set})
