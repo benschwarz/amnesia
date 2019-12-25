@@ -5,7 +5,6 @@ require 'haml'
 $:<< File.dirname(__FILE__)
 
 require 'amnesia/host'
-require 'core_ext/array'
 
 module Amnesia
   class Application < Sinatra::Base
