@@ -4,8 +4,8 @@
       %img{src: graph_url(bytes_sum, limit_maxbytes_sum)}
     %section.stats-text
       %h3
-        %span.graph-indicator Used Memory
-        \/ Free Memory
+        %span.graph-indicator Used Memory (#{number_to_human_size(bytes_sum)})
+        \/ Free Memory (#{number_to_human_size(limit_maxbytes_sum)})
       %p The cumulative amount of free memory and total memory across all active hosts.
 
   %article.stats
@@ -13,8 +13,8 @@
       %img{src: graph_url(get_hits_sum, get_misses_sum)}
     %section.stats-text
       %h3
-        %span.graph-indicator Hit
-        \/ Miss
+        %span.graph-indicator Hit (#{get_hits_sum})
+        \/ Miss (#{get_misses_sum})
       %p The amount of returned caches vs misses, misses usually require your application servers to work harder.
 
   %article.stats
@@ -22,8 +22,8 @@
       %img{src: graph_url(cmd_get_sum, cmd_set_sum)}
     %section.stats-text
       %h3
-        %span.graph-indicator Read
-        \/ Write
+        %span.graph-indicator Read (#{cmd_get_sum})
+        \/ Write (#{cmd_set_sum})
       %p More writes than reads can often mean that you’re caching too early, or that you’ve not been monitoring for very long.
 
 %nav
