@@ -47,6 +47,18 @@ module Amnesia
           "%.#{precision}f %s" % [ result, SIZE_UNITS[exp] ]
         end
       end
+
+      def alive_hosts
+        @alive_hosts ||= @hosts.select(&:alive?)
+      end
+
+      %w[ bytes limit_maxbytes get_hits get_misses cmd_get cmd_set ].each do |stat|
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def #{stat}_sum
+            Array(alive_hosts).map(&:#{stat}).sum
+          end
+        RUBY
+      end
     end
 
     get '/' do
