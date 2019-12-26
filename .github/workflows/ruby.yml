@@ -18,7 +18,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('**/*.gemspec') }}
         restore-keys: |
           ${{ runner.os }}-${{ matrix.ruby }}-gems-
     - name: Install gems
