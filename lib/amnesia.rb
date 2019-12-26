@@ -29,7 +29,7 @@ module Amnesia
     end if ENV['AMNESIA_CREDS']
 
     helpers do
-      def graph_url(data = [])
+      def graph_url(*data)
         Gchart.pie(data: data, size: '115x115', bg: 'ffffff00')
       end
 
