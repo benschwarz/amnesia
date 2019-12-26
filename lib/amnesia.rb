@@ -55,7 +55,7 @@ module Amnesia
       %w[ bytes limit_maxbytes get_hits get_misses cmd_get cmd_set ].each do |stat|
         class_eval <<-RUBY, __FILE__, __LINE__ + 1
           def #{stat}_sum
-            Array(alive_hosts).map(&:#{stat}).sum
+            alive_hosts.map(&:#{stat}).sum
           end
         RUBY
       end
