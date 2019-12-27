@@ -4,12 +4,14 @@ require 'haml'
 
 $:<< File.dirname(__FILE__)
 
-require 'amnesia/host'
+require 'amnesia/authentication'
 require 'amnesia/helpers'
+require 'amnesia/host'
 require 'amnesia/routes'
 
 module Amnesia
   class Application < Sinatra::Base
+    include Amnesia::Authentication
     include Amnesia::Helpers
     include Amnesia::Routes
 
@@ -25,10 +27,5 @@ module Amnesia
       addresses = addresses.split "," if addresses.is_a? String
       Array(addresses).flatten.map { |address| Amnesia::Host.new address }
     end
-
-    use Rack::Auth::Basic, "Amnesia" do |username, password|
-      user, pass = ENV['AMNESIA_CREDS'].split(':')
-      username == user and password == pass
-    end if ENV['AMNESIA_CREDS']
   end
 end
