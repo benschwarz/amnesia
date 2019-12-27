@@ -6,10 +6,13 @@ $:<< File.dirname(__FILE__)
 
 require 'amnesia/host'
 require 'amnesia/helpers'
+require 'amnesia/routes'
 
 module Amnesia
   class Application < Sinatra::Base
     include Amnesia::Helpers
+    include Amnesia::Routes
+
     set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
     set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
 
@@ -27,18 +30,5 @@ module Amnesia
       user, pass = ENV['AMNESIA_CREDS'].split(':')
       username == user and password == pass
     end if ENV['AMNESIA_CREDS']
-
-    get '/' do
-      haml :index
-    end
-
-    get '/:address' do
-      @host = find_host params[:address]
-      @host ? haml(:host) : halt(404)
-    end
-
-    def find_host address
-      @hosts.find { |h| h.address == address }
-    end
   end
 end
