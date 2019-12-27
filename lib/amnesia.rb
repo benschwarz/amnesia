@@ -15,8 +15,8 @@ module Amnesia
     include Amnesia::Helpers
     include Amnesia::Routes
 
-    set :public_folder, File.join(File.dirname(__FILE__), 'amnesia', 'public')
-    set :views, File.join(File.dirname(__FILE__), 'amnesia', 'views')
+    set :public_folder, File.join(__dir__, 'amnesia', 'public')
+    set :views, File.join(__dir__, 'amnesia', 'views')
 
     def initialize(app = nil, options = {})
       @hosts = build_hosts options[:hosts] || ENV['MEMCACHE_SERVERS'] || '127.0.0.1:11211'
