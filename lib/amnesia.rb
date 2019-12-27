@@ -1,9 +1,6 @@
 require 'sinatra/base'
 require 'googlecharts'
 require 'haml'
-
-$:<< File.dirname(__FILE__)
-
 require 'amnesia/authentication'
 require 'amnesia/helpers'
 require 'amnesia/host'
