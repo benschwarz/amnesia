@@ -2,25 +2,37 @@ require 'dalli'
 
 module Amnesia
   class Host
+    FLOAT_STATS  = %w[ rusage_user rusage_system ]
+    STRING_STATS = %w[ version libevent ]
+
     def initialize(address)
       @address = address
     end
 
     def alive?
-      return true if connection.stats
+      return true if connection.stats[@address]
     rescue Dalli::DalliError
       return false
     end
 
     def method_missing(method, *args)
-      stats[method.to_s].sum if stats.has_key? method.to_s
+      if stats.has_key? method.to_s
+        value = stats[method.to_s]
+        if FLOAT_STATS.include? method
+          Float(value)
+        elsif STRING_STATS.include? method
+          value
+        else
+          Integer(value)
+        end
+      else
+        super
+      end
     end
 
     def stats
       stats_val = connection.stats
-      stats_val.values.first
-    rescue Dalli::DalliError
-      return {}
+      stats_val.values.first || {}
     end
 
     def address
@@ -35,7 +47,7 @@ module Amnesia
 
     def connect(address = nil)
       if defined?(EM) && EM.respond_to?(:reactor_running?) && EM::reactor_running?
-        opts = {:async => true}
+        opts = {async: true}
       else
         opts = {}
       end

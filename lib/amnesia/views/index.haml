@@ -1,33 +1,39 @@
-- if @hosts.any?{|host| host.alive? }
-  %section#overall
-    %section.stats.graph
-      %img{:src => graph_url([@hosts.collect{|h| h.get_hits if h.alive? }.compact.sum, @hosts.collect{|h| h.get_misses if h.alive? }.compact.sum])}
+- if alive_hosts.any?
+  %article.stats
+    %section.stats-graph
+      %img{src: graph_url(bytes_sum, limit_maxbytes_sum)}
+    %section.stats-text
       %h3
-        %span.graph-indicator Hit
-        \/ Miss
-      %p The amount of returned caches vs misses, misses usually require your application servers to work harder.
-    %section.stats.graph
-      %img{:src => graph_url([@hosts.collect{|h| h.cmd_get if h.alive? }.compact.sum, @hosts.collect{|h| h.cmd_set if h.alive? }.compact.sum])}
-      %h3
-        %span.graph-indicator Read
-        \/ Write
-      %p More writes than reads can often mean that you’re caching too early, or that you’ve not been monitoring for very long.
-
-    %section.stats.graph
-      %img{:src => graph_url([@hosts.collect{|h| h.bytes if h.alive? }.compact.sum, @hosts.collect{|h| h.limit_maxbytes if h.alive? }.compact.sum])}
-      %h3
-        %span.graph-indicator Used Memory
-        \/ Free Memory
+        %span.graph-indicator Used Memory (#{number_to_human_size(bytes_sum)})
+        \/ Free Memory (#{number_to_human_size(limit_maxbytes_sum)})
       %p The cumulative amount of free memory and total memory across all active hosts.
 
-%nav#hosts
-  %p.sub Active Hosts
+  %article.stats
+    %section.stats-graph
+      %img{src: graph_url(get_hits_sum, get_misses_sum)}
+    %section.stats-text
+      %h3
+        %span.graph-indicator Hit (#{get_hits_sum})
+        \/ Miss (#{get_misses_sum})
+      %p The amount of returned caches vs misses, misses usually require your application servers to work harder.
+
+  %article.stats
+    %section.stats-graph
+      %img{src: graph_url(cmd_get_sum, cmd_set_sum)}
+    %section.stats-text
+      %h3
+        %span.graph-indicator Read (#{cmd_get_sum})
+        \/ Write (#{cmd_set_sum})
+      %p More writes than reads can often mean that you’re caching too early, or that you’ve not been monitoring for very long.
+
+%nav
+  %p.sub Known Hosts
   %ul
   - for host in @hosts
     - if host.alive?
-      %li
-        %a{:href => url("/#{host.address}") }= host.address
+      %li.alive-host
+        %a{href: url("/#{host.address}") }= host.address
     - else
-      %li.inactive
+      %li.dead-host
         = host.address
         (Inactive)

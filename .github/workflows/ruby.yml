@@ -1,0 +1,36 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.4.x', '2.5.x', '2.6.x' ]
+    steps:
+    - name: Install memcache
+      run: |
+        sudo apt update
+        sudo apt install -y memcached
+    - name: Start memcached
+      run: memcached -d
+    - uses: actions/checkout@v1
+    - name: Set up Ruby ${{ matrix.ruby }}
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Cache gems
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-${{ matrix.ruby }}-gems-${{ hashFiles('**/*.gemspec') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.ruby }}-gems-
+    - name: Install gems
+      run: |
+        gem install bundler
+        bundle config path vendor/bundle
+        bundle check || bundle install --jobs 4 --retry 3
+    - name: Run tests
+      run: bundle exec rspec
