@@ -10,7 +10,7 @@ module Amnesia
       SIZE_UNITS = %w[ Bytes KB MB GB TB PB EB ]
 
       def graph_url(*data)
-        Gchart.pie(data: data, size: '115x115', bg: 'ffffff00')
+        Gchart.pie(data: data, size: '115x115', bg: 'ffffff00', use_ssl: true)
       end
 
       # https://github.com/rails/rails/blob/fbe335cfe09bf0949edfdf0c4b251f4d081bd5d7/activesupport/lib/active_support/number_helper/number_to_human_size_converter.rb
