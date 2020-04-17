@@ -90,6 +90,19 @@ on heroku, like this:
 
     heroku config:add AMNESIA_CREDS=ben:schwarz
 
+### Content Security Policy
+
+Amnesia uses Google Charts to display pie charts. In case you're employing
+a CSP header you'll need to add the Google Chart servers as a valid image source, e.g.:
+
+    Content-Security-Policy: img-src 'self' data: https: https://chart.apis.google.com;
+
+Within a Rack app you can use [Rack::Protection](http://www.sinatrarb.com/protection):
+
+```rb
+use Rack::Protection::ContentSecurityPolicy, img-src: "'self' data: https: https://chart.apis.google.com"
+```
+
 ## Potential issues
 
 * Hosts are listed as "Inactive" or "Not Responding"
