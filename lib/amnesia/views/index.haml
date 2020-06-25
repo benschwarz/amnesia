@@ -4,7 +4,7 @@
       %img{src: graph_url(bytes_sum, limit_maxbytes_sum)}
     %section.stats-text
       %h3
-        %span.graph-indicator Used Memory (#{number_to_human_size(bytes_sum)})
+        %span.graph-indicator Used (#{number_to_human_size(bytes_sum)})
         \/ Available Memory (#{number_to_human_size(limit_maxbytes_sum)})
       %p The cumulative amount of available memory across all active hosts.
 
