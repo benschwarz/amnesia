@@ -2,6 +2,7 @@ require 'rspec'
 
 ENV['RACK_ENV'] ||= 'test'
 ENV['AMNESIA_CREDS'] ||= 'admin:amnesia'
+ENV['MEMCACHE_SERVERS'] ||= 'localhost'
 
 require 'rack/test'
 require 'amnesia'

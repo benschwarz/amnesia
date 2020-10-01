@@ -21,8 +21,13 @@ describe Amnesia::Application do
     end
 
     it "should respond to /:host" do
-      get "/127.0.0.1:11211"
+      get "/localhost:11211"
       expect(last_response.status).to eq 200
+    end
+
+    it "should respond to /:host without port with not found" do
+      get "/localhost"
+      expect(last_response.status).to eq 404
     end
 
     it "should not display unknown host" do
