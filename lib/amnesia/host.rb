@@ -5,8 +5,14 @@ module Amnesia
     FLOAT_STATS  = %w[ rusage_user rusage_system ]
     STRING_STATS = %w[ version libevent ]
 
+    def self.normalize_address address
+      return "#{address}:#{Dalli::Server::DEFAULT_PORT}" unless address.include? ":"
+
+      address
+    end
+
     def initialize(address)
-      @address = address
+      @address = self.class.normalize_address address
     end
 
     def alive?
