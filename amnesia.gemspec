@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "sinatra"
   s.add_dependency "dalli"
-  s.add_dependency "googlecharts", "~> 1.6.8"
   s.add_dependency "haml"
 
   s.add_development_dependency "rspec", "~> 3.9"
