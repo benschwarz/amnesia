@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require 'googlecharts'
 require 'haml'
 require 'amnesia/authentication'
 require 'amnesia/helpers'

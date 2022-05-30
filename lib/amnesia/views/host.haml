@@ -6,7 +6,7 @@
 
 %article.stats
   %section.stats-graph
-    %img{src: graph_url(@host.bytes, @host.limit_maxbytes) }
+    %img{src: graph_url(@host.bytes, @host.limit_maxbytes), width: 90}
   %section.stats-text
     %h3
       %span.graph-indicator Used (#{number_to_human_size(@host.bytes)})
@@ -15,7 +15,7 @@
 
 %article.stats
   %section.stats-graph
-    %img{src: graph_url(@host.get_hits, @host.get_misses) }
+    %img{src: graph_url(@host.get_hits, @host.get_misses), width: 90}
   %section.stats-text
     %h3
       %span.graph-indicator Hit (#{@host.get_hits})
@@ -24,7 +24,7 @@
 
 %section.stats
   %section.stats-graph
-    %img{src: graph_url(@host.cmd_get, @host.cmd_set) }
+    %img{src: graph_url(@host.cmd_get, @host.cmd_set), width: 90}
   %section.stats-text
     %h3
       %span.graph-indicator Read (#{@host.cmd_get})

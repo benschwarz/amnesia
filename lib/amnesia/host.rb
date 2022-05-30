@@ -4,9 +4,10 @@ module Amnesia
   class Host
     FLOAT_STATS  = %w[ rusage_user rusage_system ]
     STRING_STATS = %w[ version libevent ]
+    DEFAULT_PORT = 11_211
 
     def self.normalize_address address
-      return "#{address}:#{Dalli::Server::DEFAULT_PORT}" unless address.include? ":"
+      return "#{address}:#{DEFAULT_PORT}" unless address.include? ":"
 
       address
     end

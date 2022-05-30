@@ -47,10 +47,9 @@ header { margin: 1em 0; }
   align-items: center;
   margin: 2em 0;
 }
-.stats-graph img { margin-left: -10px; }
 .stats-text {
   flex: 1 1;
-  margin-left: 1em;
+  margin-left: 1.5em;
 }
 
 .graph-indicator { color: #ff9900; }

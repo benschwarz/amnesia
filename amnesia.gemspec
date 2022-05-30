@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "amnesia"
-  s.version     = "1.0.2"
+  s.version     = "1.1.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ben Schwarz"]
   s.email       = ["ben.schwarz@gmail.com"]
@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "sinatra"
   s.add_dependency "dalli"
-  s.add_dependency "googlecharts", "~> 1.6.8"
   s.add_dependency "haml"
 
   s.add_development_dependency "rspec", "~> 3.9"

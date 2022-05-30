@@ -1,7 +1,7 @@
 - if alive_hosts.any?
   %article.stats
     %section.stats-graph
-      %img{src: graph_url(bytes_sum, limit_maxbytes_sum)}
+      %img{src: graph_url(bytes_sum, limit_maxbytes_sum), width: 90}
     %section.stats-text
       %h3
         %span.graph-indicator Used (#{number_to_human_size(bytes_sum)})
@@ -10,7 +10,7 @@
 
   %article.stats
     %section.stats-graph
-      %img{src: graph_url(get_hits_sum, get_misses_sum)}
+      %img{src: graph_url(get_hits_sum, get_misses_sum), width: 90}
     %section.stats-text
       %h3
         %span.graph-indicator Hit (#{get_hits_sum})
@@ -19,7 +19,7 @@
 
   %article.stats
     %section.stats-graph
-      %img{src: graph_url(cmd_get_sum, cmd_set_sum)}
+      %img{src: graph_url(cmd_get_sum, cmd_set_sum), width: 90}
     %section.stats-text
       %h3
         %span.graph-indicator Read (#{cmd_get_sum})
