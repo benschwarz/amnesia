@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec", "~> 3.9"
   s.add_development_dependency "rack-test"
+  s.add_development_dependency "thin"
 end
