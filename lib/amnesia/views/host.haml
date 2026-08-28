@@ -1,6 +1,7 @@
 %h2.host
   %span.host-address
     = @host.address
+  %span.host-version= @host.version
   %small.host-details
     = "#{@host.curr_items} item/s in cache, with #{@host.curr_connections} active connections"
 
