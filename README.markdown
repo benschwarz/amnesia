@@ -37,28 +37,32 @@ Available for single instances only:
 
 ### How to run it alongside your Rack application
 
-"config.ru":
-  
-    require 'amnesia'
-    rack_app = Rack::Builder.app do
-      map "/amnesia" do
-        run Amnesia::Application.new
-      end
-      run YourSinatra::Application
-    end
-    run rack_app 
+```rb
+# config.ru
+
+require 'amnesia'
+rack_app = Rack::Builder.app do
+  map "/amnesia" do
+    run Amnesia::Application.new
+  end
+  run YourSinatra::Application
+end
+run rack_app 
+```
 
 ### How to run it alongside your Rails application
 
-"Gemfile":
+```rb
+# Gemfile
 
-    gem 'amnesia', '>=1.0.2'
+gem 'amnesia', '>=1.0.2'
+```
 
+```rb
+# config/routes.rb
 
-"config/routes.rb":
-
-    mount Amnesia::Application.new => "/amnesia" 
-
+mount Amnesia::Application.new => "/amnesia" 
+```
 
 ### Then, cruise on over to `your-host.tld/amnesia`
 
