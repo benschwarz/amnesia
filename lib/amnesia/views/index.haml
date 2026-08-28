@@ -32,7 +32,8 @@
   - for host in @hosts
     - if host.alive?
       %li.alive-host
-        %a{href: url("/#{host.address}") }= host.address
+        %a{href: url("/#{host.address}")}= host.address
+        %span.host-version= host.version
     - else
       %li.dead-host
         = host.address

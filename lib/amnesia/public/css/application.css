@@ -41,6 +41,14 @@ header { margin: 1em 0; }
   color: #000;
   padding: 2px 4px;
 }
+.host-version {
+  font-size: 0.8em;
+  padding: 0.1em 0.4em;
+  font-family: monospace;
+  letter-spacing: -0.1em;
+  background-color: #efefef;
+  border-radius: 3px;
+}
 
 .stats {
   display: flex;
@@ -82,5 +90,7 @@ footer a:hover { color: #999; }
   .host-details {
     color: #fff;
   }
-
+  .host-version {
+    background-color: #333;
+  }
 }

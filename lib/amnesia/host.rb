@@ -46,6 +46,10 @@ module Amnesia
       @address || @connection.servers.join(', ')
     end
 
+    def version
+      connection.version.values.first
+    end
+
     private
 
     def connection
